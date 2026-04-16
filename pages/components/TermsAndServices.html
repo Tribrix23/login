@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - <?php echo SITE_NAME; ?></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-16">
+                <a href="../../index.php" class="flex items-center gap-2">
+                    <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900"><?php echo SITE_NAME; ?></span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="../../pages/login.php" class="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-lg font-medium transition-colors">Sign In</a>
+                    <a href="../../pages/register.php" class="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">Get Started</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white rounded-2xl shadow-sm p-8 md:p-12">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Terms of Service</h1>
+            <p class="text-gray-500 mb-8">Last updated: <?php echo date('F j, Y'); ?></p>
+
+            <div class="prose prose-gray max-w-none space-y-8">
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">1. Acceptance of Terms</h2>
+                    <p class="text-gray-600 leading-relaxed">By accessing and using <?php echo SITE_NAME; ?>, you accept and agree to be bound by the terms and provision of this agreement. Additionally, when using this service, you shall be subject to all posted guidelines or rules applicable to such services.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">2. Description of Service</h2>
+                    <p class="text-gray-600 leading-relaxed"><?php echo SITE_NAME; ?> provides users with access to a rich collection of resources, including various communications tools, forums, shopping services, personalized content, and branded programming through its network of properties. You also understand and agree that the service may include advertisements and that these advertisements are necessary for <?php echo SITE_NAME; ?> to provide the service.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">3. Registration Obligations</h2>
+                    <p class="text-gray-600 leading-relaxed">In consideration of your use of the Service, you agree to: (a) provide true, accurate, current, and complete information about yourself as prompted by the Service's registration form and (b) maintain and promptly update the registration data to keep it true, accurate, current, and complete.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">4. Privacy Policy</h2>
+                    <p class="text-gray-600 leading-relaxed">Registration data and certain other information about you is subject to our Privacy Policy. You understand that through your use of the Service, you consent to the collection and use of this information, including the transfer of this information to other countries for storage, processing, and use.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">5. Account Responsibilities</h2>
+                    <p class="text-gray-600 leading-relaxed">You are responsible for maintaining the confidentiality of your account and password. You agree to notify us immediately of any unauthorized use of your account or password. You agree to be solely responsible for all activities that occur under your account or password.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">6. User Conduct</h2>
+                    <p class="text-gray-600 leading-relaxed">You agree not to use the Service to: upload, post, email, transmit, or otherwise make available any content that is unlawful, harmful, threatening, abusive, harassing, tortious, defamatory, vulgar, obscene, libelous, invasive of another's privacy, hateful, or racially, ethnically, or otherwise objectionable.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">7. Limitation of Liability</h2>
+                    <p class="text-gray-600 leading-relaxed">In no event shall <?php echo SITE_NAME; ?>, its affiliates, officers, directors, employees, agents, or licensors be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">8. Changes to Terms</h2>
+                    <p class="text-gray-600 leading-relaxed"><?php echo SITE_NAME; ?> reserves the right, at its sole discretion, to modify or replace these Terms at any time. What constitutes a material change will be determined at our sole discretion. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">9. Contact Us</h2>
+                    <p class="text-gray-600 leading-relaxed">If you have any questions about these Terms of Service, please contact us through our support channels.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 py-8 mt-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - <?php echo SITE_NAME; ?></title>
+    <title>Forgot Password - <?php echo SITE_NAME; ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
@@ -48,12 +48,12 @@ if (isset($_SESSION['user_id'])) {
                 class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-8 backdrop-blur-sm">
                 <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                 </svg>
             </div>
-            <h2 class="text-3xl font-bold text-white mb-4">Welcome Back</h2>
-            <p class="text-indigo-100 text-lg">Sign in to access your account and manage your authentication securely.
-            </p>
+            <h2 class="text-3xl font-bold text-white mb-4">Reset Your Password</h2>
+            <p class="text-indigo-100 text-lg">No worries! Enter your email and we'll send you instructions to reset
+                your password.</p>
         </div>
     </div>
 
@@ -69,43 +69,26 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                     <span class="text-xl font-bold text-gray-900"><?php echo SITE_NAME; ?></span>
                 </a>
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
-                <p class="text-gray-600">Enter your credentials to access your account</p>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Forgot password?</h1>
+                <p class="text-gray-600">Enter your email address and we'll send you a link to reset your password.</p>
             </div>
 
-            <form action="../lib/handler/loginHandler.php" method="POST" class="space-y-5">
+            <form action="../lib/handler/forgotPasswordHandler.php" method="POST" class="space-y-5">
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="name@example.com" required
                         class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all">
                 </div>
 
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all">
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" name="remember"
-                            class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                        <span class="text-sm text-gray-600">Remember me</span>
-                    </label>
-                    <p onclick="route('forgotPassword')"
-                        class="cursor-pointer text-sm text-indigo-600 hover:text-indigo-700 font-medium">
-                        Forgot password?</p>
-                </div>
-
                 <button type="submit"
                     class="w-full gradient-bg text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-indigo-500/25">
-                    Sign In
+                    Send Reset Link
                 </button>
             </form>
 
             <div class="mt-8 text-center">
-                <p onclick="route('register')" class="text-gray-600 cursor-pointer">Don't have an account? <a
-                        class="text-indigo-600 hover:text-indigo-700 font-medium">Create one</a></p>
+                <p onclick="route('login')" class="cursor-pointer text-gray-600">Remember your password? <a
+                        class="text-indigo-600 hover:text-indigo-700 font-medium">Sign in</a></p>
             </div>
         </div>
     </div>

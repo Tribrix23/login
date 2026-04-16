@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - <?php echo SITE_NAME; ?></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-16">
+                <a href="../../index.php" class="flex items-center gap-2">
+                    <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900"><?php echo SITE_NAME; ?></span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="../../pages/login.php" class="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-lg font-medium transition-colors">Sign In</a>
+                    <a href="../../pages/register.php" class="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">Get Started</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white rounded-2xl shadow-sm p-8 md:p-12">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
+            <p class="text-gray-500 mb-8">Last updated: <?php echo date('F j, Y'); ?></p>
+
+            <div class="prose prose-gray max-w-none space-y-8">
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">1. Introduction</h2>
+                    <p class="text-gray-600 leading-relaxed">At <?php echo SITE_NAME; ?>, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service. Please read this privacy policy carefully.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">2. Information We Collect</h2>
+                    <p class="text-gray-600 leading-relaxed">We may collect personal information that you voluntarily provide to us when you register on the Website, express an interest in obtaining information about us or our products and services, when you participate in activities on the Website, or otherwise when you contact us.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">3. How We Use Your Information</h2>
+                    <p class="text-gray-600 leading-relaxed">We use personal information collected via our Website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">4. Sharing Your Information</h2>
+                    <p class="text-gray-600 leading-relaxed">We only share information with the following third parties: payment processors, hosting services, data analysis services, and email delivery services. We may also share your information in connection with a merger, bankruptcy, or sale of all or a portion of our assets.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">5. Data Security</h2>
+                    <p class="text-gray-600 leading-relaxed">We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">6. Your Rights</h2>
+                    <p class="text-gray-600 leading-relaxed">Depending on your location, you may have certain rights regarding your personal information, including the right to access, correct, delete, or restrict processing of your personal information, and the right to data portability.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">7. Cookies and Tracking Technologies</h2>
+                    <p class="text-gray-600 leading-relaxed">We may use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Policy.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">8. Changes to This Policy</h2>
+                    <p class="text-gray-600 leading-relaxed">We may update this privacy policy from time to time. The updated version will be indicated by an updated "Last updated" date and the updated version will be effective as soon as it is accessible. We encourage you to review this privacy policy frequently to stay informed about how we are protecting your information.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">9. Contact Us</h2>
+                    <p class="text-gray-600 leading-relaxed">If you have questions or comments about this policy, you may email us at support@<?php echo strtolower(str_replace(' ', '', SITE_NAME)); ?>.com.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 py-8 mt-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
