@@ -8,7 +8,7 @@ include "config/config.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo SITE_NAME; ?></title>
+    <title>Project Web</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
@@ -52,7 +52,7 @@ include "config/config.php";
                                 d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <span class="text-xl font-bold text-gray-900"><?php echo SITE_NAME; ?></span>
+                    <span class="text-xl font-bold text-gray-900">Project Web</span>
                 </a>
                 <div class="flex items-center gap-3">
                     <button onclick="route('login')"
@@ -103,7 +103,7 @@ include "config/config.php";
 
         <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Why Choose <?php echo SITE_NAME; ?>?</h2>
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Why Choose Project Web?</h2>
                 <p class="text-center text-gray-500 mb-12 max-w-xl mx-auto">Everything you need to secure your
                     applications</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -161,7 +161,7 @@ include "config/config.php";
 
     <footer class="bg-gray-900 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-gray-400">&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. All rights reserved.</p>
+            <p class="text-gray-400">&copy; <?php echo date('Y'); ?> Project Web. All rights reserved.</p>
         </div>
     </footer>
 

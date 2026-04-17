@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - <?php echo SITE_NAME; ?></title>
+    <title>Login - Project Web</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
@@ -67,7 +67,7 @@ if (isset($_SESSION['user_id'])) {
                                 d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <span class="text-xl font-bold text-gray-900"><?php echo SITE_NAME; ?></span>
+                    <span class="text-xl font-bold text-gray-900">Project Web</span>
                 </a>
                 <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
                 <p class="text-gray-600">Enter your credentials to access your account</p>

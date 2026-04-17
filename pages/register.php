@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - <?php echo SITE_NAME; ?></title>
+    <title>Register - Project Web</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
@@ -51,7 +51,7 @@ if (isset($_SESSION['user_id'])) {
                         d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                 </svg>
             </div>
-            <h2 class="text-3xl font-bold text-white mb-4">Join <?php echo SITE_NAME; ?></h2>
+            <h2 class="text-3xl font-bold text-white mb-4">Join Project Web</h2>
             <p class="text-indigo-100 text-lg">Create your account and start securing your applications with
                 enterprise-grade authentication.</p>
         </div>
@@ -67,7 +67,7 @@ if (isset($_SESSION['user_id'])) {
                                 d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <span class="text-xl font-bold text-gray-900"><?php echo SITE_NAME; ?></span>
+                    <span class="text-xl font-bold text-gray-900">Project Web</span>
                 </a>
                 <h1 class="text-3xl font-bold text-gray-900 mb-2">Create an account</h1>
                 <p class="text-gray-600">Enter your details to get started</p>
@@ -112,9 +112,9 @@ if (isset($_SESSION['user_id'])) {
                     <input type="checkbox" id="terms" name="terms" required
                         class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                     <label for="terms" class="ml-2 text-sm text-gray-600">
-                        I agree to the <a href="./components/TermsAndServices.html"
+                        I agree to the <a href="pages/components/TermsAndServices.html" target="_blank"
                             class="text-indigo-600 hover:text-indigo-700 font-medium">Terms of Service</a> and <a
-                            href="./components/PrivacyAndPolicy.html"
+                            href="pages/components/PrivacyAndPolicy.html" target="_blank"
                             class="text-indigo-600 hover:text-indigo-700 font-medium">Privacy Policy</a>
                     </label>
                 </div>
