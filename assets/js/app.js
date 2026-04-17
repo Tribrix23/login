@@ -5,7 +5,7 @@ function route(page) {
 
 // Go Back
 function goLogin() {
-    window.location.href = './';
+    window.location.href = `./proxy.php?page=login`;
 }
 
 // Toggle Password Visibility

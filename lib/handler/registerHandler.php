@@ -1,13 +1,17 @@
 <?php
 require_once __DIR__ . '/../database/db.php';
+require_once __DIR__ . '/../database/publicDB.php';
 require_once __DIR__ . '/../api/mailApi.php';
 
 function register($data)
 {
     global $pdo;
+    global $pdoPublic;
 
     $email = $data['email'] ?? '';
     $password = $data['password'] ?? '';
+    $firstname = $data['first_name'] ?? '';
+    $lastname = $data['last_name'] ?? '';
 
     $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
     $stmt->execute([$email]);
@@ -25,6 +29,7 @@ function register($data)
     $stmt->execute([$email, $hashedPassword]);
 
     $userID = $pdo->lastInsertId();
+
     $token = bin2hex(random_bytes(32));
     $expiresAt = date("Y-m-d H:i:s", strtotime("+1 day"));
 
@@ -33,7 +38,14 @@ function register($data)
 
     $emailResult = sendVerificationEmail($email, $token);
     $warning = "";
-    
+
+    try {
+        $stmt = $pdoPublic->prepare("INSERT INTO profile (user_id, first_name, last_name) VALUES (?, ?, ?)");
+        $stmt->execute([$userID, $firstname, $lastname]);
+    } catch (PDOException $e) {
+        error_log("Profile insert error: " . $e->getMessage());
+    }
+
     if (!$emailResult["success"]) {
         $warning = " (warning: verification email may not have been sent)";
     }

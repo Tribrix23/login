@@ -32,6 +32,11 @@ if ($page === 'session') {
     exit;
 }
 
+if ($page === 'profile') {
+    include 'lib/handler/profileHandler.php';
+    exit;
+}
+
 if ($page === 'home') {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();

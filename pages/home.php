@@ -63,7 +63,7 @@ include __DIR__ . "/../config/config.php";
                     </svg>
                 </div>
                 <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome back,</h1>
-                <p class="text-2xl font-bold gradient-text mb-8">NAME PLACEHOLDER</p>
+                <p class="text-2xl font-bold gradient-text mb-8" id="userName"></p>
 
                 <div class="grid grid-cols-2 gap-4 mb-8">
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
@@ -117,7 +117,7 @@ include __DIR__ . "/../config/config.php";
 
     <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
 
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/script.js"></script>
     <script>
         document.getElementById('logoutBtn').addEventListener('click', async () => {
             try {

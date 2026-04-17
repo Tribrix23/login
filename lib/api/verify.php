@@ -184,7 +184,7 @@ $stmt->execute([$token]);
                 <p class="text-gray-600">Your account is now active. You can sign in to your account.</p>
             </div>
 
-            <p onclick="route('login')"
+            <p onclick="goLogin()"
                 class="cursor-pointer inline-block w-full gradient-bg text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-indigo-500/25">
                 Go to Login
             </p>
