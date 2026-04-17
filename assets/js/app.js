@@ -3,9 +3,38 @@ function route(page) {
     window.location.href = `proxy.php?page=${page}`;
 }
 
+// Go Back
+function goLogin() {
+    window.location.href = './';
+}
+
+// Toggle Password Visibility
+function togglePassword(inputId, buttonId) {
+    const input = document.getElementById(inputId);
+    const button = document.getElementById(buttonId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        button.innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+            </svg>
+        `;
+    } else {
+        input.type = 'password';
+        button.innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+        `;
+    }
+}
+
 // Toast Notification System
 function showToast(message, type = 'success') {
     const container = document.getElementById('toast-container');
+    if (!container) return;
+    
     const toast = document.createElement('div');
     
     const colors = {
@@ -30,12 +59,10 @@ function showToast(message, type = 'success') {
     
     container.appendChild(toast);
     
-    // Animate in
     setTimeout(() => {
         toast.classList.remove('translate-x-96');
     }, 10);
     
-    // Auto dismiss
     setTimeout(() => {
         toast.classList.add('translate-x-96', 'opacity-0');
         setTimeout(() => toast.remove(), 300);
@@ -52,7 +79,7 @@ function showLoading() {
         overlay.innerHTML = `
             <div class="bg-white rounded-xl p-8 flex flex-col items-center gap-4 shadow-2xl">
                 <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-                <p class="text-gray-700 font-medium">Creating your account...</p>
+                <p class="text-gray-700 font-medium">Loading...</p>
             </div>
         `;
         document.body.appendChild(overlay);
@@ -74,7 +101,7 @@ function setButtonLoading(button, loading) {
         button.innerHTML = `
             <div class="flex items-center justify-center gap-2">
                 <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                <span>Creating Account...</span>
+                <span>Loading...</span>
             </div>
         `;
         button.disabled = true;
@@ -88,143 +115,151 @@ function setButtonLoading(button, loading) {
 
 // Document Ready
 document.addEventListener('DOMContentLoaded', async() => {
-    console.log('Script loaded');
+    
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirm_password');
     const alertMessage = document.getElementById('passwordMatch');
-    const first_name = document.getElementById('first_name');
-    const last_name = document.getElementById('last_name');
+    const firstName = document.getElementById('first_name');
+    const lastName = document.getElementById('last_name');
     const email = document.getElementById('email');
     const registerButton = document.querySelector('button[type="submit"]');
 
-    // Password matching
-    confirmPassword.addEventListener('input', () => {
-        const cP = confirmPassword.value;
-        const p = password.value;
-        if (cP !== p) {
-            alertMessage.classList.remove('hidden');
-        } else {
-            alertMessage.classList.add('hidden');
-        }
-    });
-
-    // Sessions
-    const res = await fetch("proxy.php?page=session", {
-    credentials: "include"
-    });
-
-    const data = await res.json();
-
-    if (data.loggedIn) {
-        console.log("User is logged in:", data.user_id);
-        router("home");
-    } else {
-        console.log("No session found");
-        window.location.href = '/';
+    // Password matching (only on register page)
+    if (confirmPassword && password && alertMessage) {
+        confirmPassword.addEventListener('input', () => {
+            if (confirmPassword.value !== password.value) {
+                alertMessage.classList.remove('hidden');
+            } else {
+                alertMessage.classList.add('hidden');
+            }
+        });
     }
 
-    // Registration
-    document.getElementById('registerForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
+    // Session check
+    try {
+        const sessionRes = await fetch("proxy.php?page=session", {
+            credentials: "include"
+        });
+        const text = await sessionRes.text();
+        let sessionData;
+        try {
+            sessionData = JSON.parse(text);
+        } catch(e) {
+            sessionData = { loggedIn: false };
+        }
         
-        const cP = confirmPassword.value;
-        const p = password.value;
-        const fname = first_name.value;
-        const lname = last_name.value;
-        const em = email.value;
-
-        if (cP !== p) {
-            showToast('Passwords do not match', 'error');
-            return;
+        if (sessionData.loggedIn && !window.location.href.includes('page=home')) {
+            route("home");
         }
+    } catch (err) {
+    }
 
-        // Show loading state
-        showLoading();
-        setButtonLoading(registerButton, true);
-
-        try {
-            const res = await fetch("proxy.php?page=reg", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    first_name: fname,
-                    last_name: lname,
-                    email: em,
-                    password: p
-                })
-            });
-
-            const text = await res.text();
-            console.log('Response status:', res.status);
-            console.log('Response text:', text);
+    // Registration form
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm && confirmPassword && firstName && lastName && email && registerButton) {
+        registerForm.addEventListener('submit', async(e) => {
+            e.preventDefault();
             
-            let data;
+            const cP = confirmPassword.value;
+            const p = password.value;
+            const fname = firstName.value;
+            const lname = lastName.value;
+            const em = email.value;
+
+            if (cP !== p) {
+                showToast('Passwords do not match', 'error');
+                return;
+            }
+
+            showLoading();
+            setButtonLoading(registerButton, true);
+
             try {
-                data = JSON.parse(text);
-            } catch (e) {
-                data = { success: false, message: 'Invalid response from server' };
-            }
+                const res = await fetch("proxy.php?page=reg", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        first_name: fname,
+                        last_name: lname,
+                        email: em,
+                        password: p
+                    })
+                });
 
-            console.log(data);
-
-            if (data.success) {
-                showToast('✓ ' + data.message, 'success');
-                // Reset form after success
-                setTimeout(() => {
-                    document.getElementById('registerForm').reset();
-                    route('login');
-                }, 2000);
-            } else {
-                const errorMsg = data.message || 'Registration failed. Please try again.';
-                
-                if (errorMsg.toLowerCase().includes('already exists') || errorMsg.toLowerCase().includes('already registered')) {
-                    showToast('✗ This email is already registered', 'error');
-                } else {
-                    showToast('✗ ' + errorMsg, 'error');
+                const text = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    data = { success: false, message: 'Invalid response from server' };
                 }
+
+                if (data.success) {
+                    showToast('✓ ' + data.message, 'success');
+                    setTimeout(() => {
+                        document.getElementById('registerForm').reset();
+                        route('login');
+                    }, 2000);
+                } else {
+                    const errorMsg = data.message || 'Registration failed';
+                    if (errorMsg.toLowerCase().includes('already')) {
+                        showToast('✗ This email is already registered', 'error');
+                    } else {
+                        showToast('✗ ' + errorMsg, 'error');
+                    }
+                }
+            } catch (err) {
+                showToast('Network error. Please try again.', 'error');
+            } finally {
+                hideLoading();
+                setButtonLoading(registerButton, false);
             }
-        } catch (err) {
-            console.error("Request failed:", err);
-            showToast('Network error. Please check your connection and try again.', 'error');
-        } finally {
-            hideLoading();
-            setButtonLoading(registerButton, false);
-        }
-    });
+        });
+    }
 
-    // Login 
-    document.getElementById('loginForm').addEventListener('submit', async(e) => {
-        e.preventDefault();
+    // Login form
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async(e) => {
+            e.preventDefault();
 
-        em = email.value;
-        pass = password.value;
+            const em = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
 
-        try {
-            const res = await fetch("proxy.php?page=log", {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: em,
-                    password: pass
-                })
-            })
+            showLoading();
 
-            const data = await res.json();
+            try {
+                const res = await fetch("proxy.php?page=log", {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: em,
+                        password: pass
+                    })
+                });
 
-            if(data.sucess) {
-                route()
+                const text = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    data = { success: false, message: 'Invalid response from server' };
+                }
+
+                if (data.success) {
+                    route('home');
+                } else {
+                    showToast('✗ ' + data.message, 'error');
+                }
+            } catch (err) {
+            } finally {
+                hideLoading();
             }
-
-        } catch (err) {
-            console.error(err)
-        }
-
-    })
-
-
+        });
+    }
 });

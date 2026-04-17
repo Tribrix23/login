@@ -36,7 +36,6 @@ function register($data)
     
     if (!$emailResult["success"]) {
         $warning = " (warning: verification email may not have been sent)";
-        error_log("Email send failed for $email: " . $emailResult["error"]);
     }
 
     return json_encode([

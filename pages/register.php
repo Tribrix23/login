@@ -68,7 +68,7 @@ include __DIR__ . "/../config/config.php";
                 <p class="text-gray-600">Enter your details to get started</p>
             </div>
 
-            <form class="space-y-5" id="registerForm">
+            <form class="space-y-5" id="registerForm" onsubmit="return false;">
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
@@ -88,19 +88,33 @@ include __DIR__ . "/../config/config.php";
                         class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all">
                 </div>
 
-                <div>
+                <div class="relative">
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
                     <input type="password" id="password" name="password" placeholder="Create a password" required
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all">
+                        class="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all">
+                    <button type="button" onclick="togglePassword('password', 'togglePasswordBtn')"
+                        class="absolute right-3 top-[38px] text-gray-400 hover:text-gray-600">
+                        <svg id="togglePasswordBtn" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
                     <p class="text-xs text-gray-500 mt-1">Must be at least 8 characters</p>
                 </div>
 
-                <div>
+                <div class="relative">
                     <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-2">Confirm
                         Password</label>
                     <input type="password" id="confirm_password" name="confirm_password"
                         placeholder="Confirm your password" required
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all">
+                        class="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all">
+                    <button type="button" onclick="togglePassword('confirm_password', 'toggleConfirmPasswordBtn')"
+                        class="absolute right-3 top-[38px] text-gray-400 hover:text-gray-600">
+                        <svg id="toggleConfirmPasswordBtn" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
                     <p id="passwordMatch" class="text-xs text-red-500 mt-1 hidden">Password does not match</p>
                 </div>
 
@@ -125,7 +139,7 @@ include __DIR__ . "/../config/config.php";
             <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-3"></div>
 
             <div class="mt-8 text-center">
-                <p onclick="route('login')" class="cursor-pointer text-gray-600">Already have an account? <a
+                <p onclick="goLogin()" class="cursor-pointer text-gray-600">Already have an account? <a
                         class="text-indigo-600 hover:text-indigo-700 font-medium">Sign in</a></p>
             </div>
         </div>
