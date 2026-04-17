@@ -68,7 +68,7 @@ include __DIR__ . "/../config/config.php";
                 <p class="text-gray-600">Enter your email address and we'll send you a link to reset your password.</p>
             </div>
 
-            <form action="../lib/handler/forgotPasswordHandler.php" method="POST" class="space-y-5">
+            <form id="FPForm" method="POST" class="space-y-5">
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="name@example.com" required

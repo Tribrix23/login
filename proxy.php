@@ -33,7 +33,12 @@ if ($page === 'session') {
 }
 
 if ($page === 'profile') {
-    include 'lib/handler/profileHandler.php';
+    include 'lib/api/profileApi.php';
+    exit;
+}
+
+if ($page === 'FP') {
+    include 'lib/api/forgotApi.php';
     exit;
 }
 

@@ -262,4 +262,32 @@ document.addEventListener('DOMContentLoaded', async() => {
             }
         });
     }
+
+    //Forgot Password
+    const ForgotPasswordForm = document.getElementById('FPForm');
+    if(ForgotPasswordForm){
+        ForgotPasswordForm.addEventListener('submit', async(e) => {
+            e.preventDefault();
+
+            const em = document.getElementById('email').value;
+
+            try{
+
+                const res = await fetch("proxy.php/page=FP", {
+                    method: 'POST',
+                    headers: ({
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({email: em})
+                })
+
+                const data = await res.json();
+                
+
+            } catch (err) {}
+            finally{
+
+            }
+        })
+    }
 });
