@@ -126,6 +126,9 @@ if (isset($_SESSION['user_id'])) {
                 </button>
             </form>
 
+            <!-- Toast Notifications -->
+            <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-3"></div>
+
             <div class="mt-8 text-center">
                 <p onclick="route('login')" class="cursor-pointer text-gray-600">Already have an account? <a
                         class="text-indigo-600 hover:text-indigo-700 font-medium">Sign in</a></p>
