@@ -17,3 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 });
+
+
+async function Register () {
+    
+}
