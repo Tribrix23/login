@@ -73,7 +73,7 @@ if (isset($_SESSION['user_id'])) {
                 <p class="text-gray-600">Enter your details to get started</p>
             </div>
 
-            <form action="../lib/handler/registerHandler.php" method="POST" class="space-y-5">
+            <form action="../lib/handler/registerHandler.php" method="POST" class="space-y-5" id="registerForm">
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
@@ -106,6 +106,7 @@ if (isset($_SESSION['user_id'])) {
                     <input type="password" id="confirm_password" name="confirm_password"
                         placeholder="Confirm your password" required
                         class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all">
+                    <p id="passwordMatch" class="text-xs text-red-500 mt-1 hidden">Password does not match</p>
                 </div>
 
                 <div class="flex items-center">

@@ -17,5 +17,10 @@ if ($page === 'forgotPassword') {
     exit;
 }
 
+if ($page === "reg") {
+    include 'lib/api/registerApi.php';
+    exit;
+}
+
 
 ?>
