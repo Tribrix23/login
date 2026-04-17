@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../database/db.php';
+require_once __DIR__ . '/../api/mailApi.php';
 
 function register($data)
 {
@@ -20,15 +21,28 @@ function register($data)
 
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    $stmt = $pdo->prepare("INSERT INTO users (email, password, isActive) VALUES (?, ?, 0)");
+    $stmt = $pdo->prepare("INSERT INTO users (email, password, is_active) VALUES (?, ?, 0)");
     $stmt->execute([$email, $hashedPassword]);
 
     $userID = $pdo->lastInsertId();
-
     $token = bin2hex(random_bytes(32));
-
     $expiresAt = date("Y-m-d H:i:s", strtotime("+1 day"));
 
+    $stmt = $pdo->prepare("INSERT INTO email_verifications (user_id, token, expires_at) VALUES (?, ?, ?)");
+    $stmt->execute([$userID, $token, $expiresAt]);
+
+    $emailResult = sendVerificationEmail($email, $token);
+    $warning = "";
+    
+    if (!$emailResult["success"]) {
+        $warning = " (warning: verification email may not have been sent)";
+        error_log("Email send failed for $email: " . $emailResult["error"]);
+    }
+
+    return json_encode([
+        "success" => true,
+        "message" => "Registration successful. Please check your email to verify your account." . $warning
+    ]);
 }
 
 ?>

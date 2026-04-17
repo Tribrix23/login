@@ -73,7 +73,7 @@ if (isset($_SESSION['user_id'])) {
                 <p class="text-gray-600">Enter your details to get started</p>
             </div>
 
-            <form action="../lib/handler/registerHandler.php" method="POST" class="space-y-5" id="registerForm">
+            <form class="space-y-5" id="registerForm">
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>

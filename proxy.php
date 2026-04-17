@@ -17,6 +17,11 @@ if ($page === 'forgotPassword') {
     exit;
 }
 
+if ($page === 'resendVerify') {
+    include "pages/resendVerify.php";
+    exit;
+}
+
 if ($page === "reg") {
     include 'lib/api/registerApi.php';
     exit;
