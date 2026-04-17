@@ -94,11 +94,6 @@ if (strtotime($record['expires_at']) < time()) {
                     <h1 class="text-2xl font-bold text-gray-900 mb-2">Verification Link Expired</h1>
                     <p class="text-gray-600">This verification link has expired. Please request a new one.</p>
                 </div>
-
-                <a href="../pages/resendVerify.php"
-                    class="inline-block w-full gradient-bg text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-indigo-500/25">
-                    Request New Verification Link
-                </a>
             </div>
         </div>
 
