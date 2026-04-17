@@ -1,10 +1,5 @@
 <?php
 include __DIR__ . "/../config/config.php";
-
-if (isset($_SESSION['user_id'])) {
-    header("Location: " . BASE_URL);
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +68,7 @@ if (isset($_SESSION['user_id'])) {
                 <p class="text-gray-600">Enter your credentials to access your account</p>
             </div>
 
-            <form action="../lib/handler/loginHandler.php" method="POST" class="space-y-5">
+            <form action="../lib/handler/loginHandler.php" method="POST" class="space-y-5" id="loginForm">
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                     <input type="email" id="email" name="email" placeholder="name@example.com" required

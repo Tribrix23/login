@@ -87,7 +87,7 @@ function setButtonLoading(button, loading) {
 }
 
 // Document Ready
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async() => {
     console.log('Script loaded');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirm_password');
@@ -107,6 +107,21 @@ document.addEventListener('DOMContentLoaded', () => {
             alertMessage.classList.add('hidden');
         }
     });
+
+    // Sessions
+    const res = await fetch("proxy.php?page=session", {
+    credentials: "include"
+    });
+
+    const data = await res.json();
+
+    if (data.loggedIn) {
+        console.log("User is logged in:", data.user_id);
+        router("home");
+    } else {
+        console.log("No session found");
+        window.location.href = '/';
+    }
 
     // Registration
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
@@ -179,5 +194,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Login (placeholder)
+    // Login 
+    document.getElementById('loginForm').addEventListener('submit', async(e) => {
+        e.preventDefault();
+
+        em = email.value;
+        pass = password.value;
+
+        try {
+            const res = await fetch("proxy.php?page=log", {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: em,
+                    password: pass
+                })
+            })
+
+            const data = await res.json();
+
+            if(data.sucess) {
+                route()
+            }
+
+        } catch (err) {
+            console.error(err)
+        }
+
+    })
+
+
 });
