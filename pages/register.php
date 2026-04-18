@@ -99,8 +99,20 @@ include __DIR__ . "/../config/config.php";
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
                     </button>
-                    <p class="text-xs text-gray-500 mt-1">Must be at least 8 characters</p>
                 </div>
+
+                <!-- Password Strength Indicator -->
+                <div id="passwordStrength" class="mt-2 hidden">
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="text-gray-500">Strength:</span>
+                        <span id="strengthText" class="font-medium"></span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1 overflow-hidden">
+                        <div id="strengthBar" class="h-1 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <p class="text-xs text-gray-500 mt-1">Must be at least 8 characters</p>
 
                 <div class="relative">
                     <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-2">Confirm

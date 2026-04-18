@@ -42,6 +42,11 @@ if ($page === 'FP') {
     exit;
 }
 
+if ($page === 'resetPassword') {
+    include 'lib/api/resetPasswordApi.php';
+    exit;
+}
+
 if ($page === 'home') {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();

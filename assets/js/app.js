@@ -8,6 +8,14 @@ function goLogin() {
     window.location.href = `./proxy.php?page=login`;
 }
 
+function goLoginF() {
+    window.location.href = `../../proxy.php?page=login`;
+}
+
+function routeF(page) {
+    window.location.href = `../../proxy.php?page=${page}`;
+}
+
 // Toggle Password Visibility
 function togglePassword(inputId, buttonId) {
     const input = document.getElementById(inputId);
@@ -124,6 +132,39 @@ document.addEventListener('DOMContentLoaded', async() => {
     const email = document.getElementById('email');
     const registerButton = document.querySelector('button[type="submit"]');
 
+    // Password strength calculation function (global)
+    function updatePasswordStrength(password) {
+        let score = 0;
+        if (password.length >= 8) score++;
+        if (password.length >= 12) score++;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+        if (/\d/.test(password)) score++;
+        if (/[^a-zA-Z0-9]/.test(password)) score++;
+
+        const strengthIndicator = document.getElementById('passwordStrength');
+        const strengthBar = document.getElementById('strengthBar');
+        const strengthText = document.getElementById('strengthText');
+
+        if (!strengthIndicator || !strengthBar || !strengthText) return;
+
+        let strength, color, width, text;
+
+        if (score <= 2) {
+            strength = 'weak'; color = 'bg-red-500'; width = '33%'; text = 'Weak';
+        } else if (score <= 3) {
+            strength = 'fair'; color = 'bg-yellow-500'; width = '66%'; text = 'Fair';
+        } else if (score <= 4) {
+            strength = 'good'; color = 'bg-blue-500'; width = '85%'; text = 'Good';
+        } else {
+            strength = 'strong'; color = 'bg-green-500'; width = '100%'; text = 'Strong';
+        }
+
+        strengthBar.className = `h-1 rounded-full transition-all duration-300 ${color}`;
+        strengthBar.style.width = width;
+        strengthText.textContent = text;
+        strengthText.className = `font-medium ${color.replace('bg-', 'text-').replace('-500', '-600')}`;
+    }
+
     // Password matching (only on register page)
     if (confirmPassword && password && alertMessage) {
         confirmPassword.addEventListener('input', () => {
@@ -131,6 +172,25 @@ document.addEventListener('DOMContentLoaded', async() => {
                 alertMessage.classList.remove('hidden');
             } else {
                 alertMessage.classList.add('hidden');
+            }
+        });
+    }
+
+    // Password strength checker (register page)
+    if (password) {
+        password.addEventListener('input', function() {
+            const currentLength = password.value.length;
+            const strengthIndicator = document.getElementById('passwordStrength');
+            
+            if (currentLength > 0) {
+                if (strengthIndicator) {
+                    strengthIndicator.classList.remove('hidden');
+                }
+                updatePasswordStrength(password.value);
+            } else {
+                if (strengthIndicator) {
+                    strengthIndicator.classList.add('hidden');
+                }
             }
         });
     }
@@ -166,8 +226,15 @@ document.addEventListener('DOMContentLoaded', async() => {
             const lname = lastName.value;
             const em = email.value;
 
+            // Password matching check
             if (cP !== p) {
                 showToast('Passwords do not match', 'error');
+                return;
+            }
+
+            // Minimum length check
+            if (p.length < 8) {
+                showToast('Password must be at least 8 characters', 'error');
                 return;
             }
 
@@ -271,9 +338,11 @@ document.addEventListener('DOMContentLoaded', async() => {
 
             const em = document.getElementById('email').value;
 
+            showLoading();
+
             try{
 
-                const res = await fetch("proxy.php/page=FP", {
+const res = await fetch("proxy.php?page=FP", {
                     method: 'POST',
                     headers: ({
                         'Content-Type': 'application/json'
@@ -283,11 +352,83 @@ document.addEventListener('DOMContentLoaded', async() => {
 
                 const data = await res.json();
                 
-
+                const fpCard = document.getElementById('FPCard');
+                fpCard.classList.remove('hidden');
+                
+                if (data.success) {
+                    fpCard.className = "rounded-xl p-4 mb-5 bg-green-50 border border-green-200";
+                    fpCard.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-medium text-green-800">Please check your email</p>
+                                <p class="text-sm text-green-600">${data.message}</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    fpCard.className = "rounded-xl p-4 mb-5 bg-red-50 border border-red-200";
+                    fpCard.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-medium text-red-800">An error occurred</p>
+                                <p class="text-sm text-red-600">${data.message}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                
             } catch (err) {}
             finally{
-
+                hideLoading();
             }
         })
+
+        // Password strength calculation function
+        function updatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (password.length >= 12) score++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+            if (/\d/.test(password)) score++;
+            if (/[^a-zA-Z0-9]/.test(password)) score++;
+
+            const strengthIndicator = document.getElementById('passwordStrength');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+
+            if (!strengthIndicator || !strengthBar || !strengthText) return;
+
+            let strength, color, width, text;
+
+            if (score <= 2) {
+                strength = 'weak'; color = 'bg-red-500'; width = '33%'; text = 'Weak';
+            } else if (score <= 3) {
+                strength = 'fair'; color = 'bg-yellow-500'; width = '66%'; text = 'Fair';
+            } else if (score <= 4) {
+                strength = 'good'; color = 'bg-blue-500'; width = '80%'; text = 'Good';
+            } else {
+                strength = 'strong'; color = 'bg-green-500'; width = '100%'; text = 'Strong';
+            }
+
+            strengthBar.className = `h-1 rounded-full transition-all duration-300 ${color}`;
+            strengthBar.style.width = width;
+            strengthText.textContent = text;
+            strengthText.className = 'font-medium ' + 
+                (strength === 'weak' ? 'text-red-500' : 
+                 strength === 'fair' ? 'text-yellow-500' : 
+                 strength === 'good' ? 'text-blue-500' : 'text-green-500');
+
+            strengthIndicator.classList.remove('hidden');
+        }
     }
 });
